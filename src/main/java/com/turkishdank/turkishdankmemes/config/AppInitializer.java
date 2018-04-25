@@ -2,6 +2,7 @@ package com.turkishdank.turkishdankmemes.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
 {
     @Override
