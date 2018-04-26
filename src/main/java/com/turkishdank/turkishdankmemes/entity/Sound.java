@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Sound  implements Serializable{
 
-    private int id;
+    private String id;
     private String name;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -26,7 +26,7 @@ public class Sound  implements Serializable{
     @Override
     public String toString() {
         return "Sound{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }

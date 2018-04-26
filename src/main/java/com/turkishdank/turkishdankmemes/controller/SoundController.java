@@ -26,9 +26,9 @@ public class SoundController
 
     @ResponseBody
     @RequestMapping(value = "/load/all")
-    public ResponseEntity<List<Sound>> loadAll()
+    public List<Sound> loadAll()
     {
-        return ResponseEntity.ok().body(soundService.loadAll());
+        return (soundService.loadAll());
     }
 
 

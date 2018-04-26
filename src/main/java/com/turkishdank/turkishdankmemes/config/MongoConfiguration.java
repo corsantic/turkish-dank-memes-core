@@ -30,9 +30,9 @@ public class MongoConfiguration extends AbstractMongoConfiguration
     {
 //        String host = environment.getRequiredProperty("spring.data.mongodb.host");
 //        int port = Integer.parseInt(environment.getRequiredProperty("spring.data.mongodb.port"));
-//        String url = environment.getProperty("spring.data.mongodb.uri");
-//        MongoClientURI uri = new MongoClientURI(url);
-        return new MongoClient();
+        String url = environment.getProperty("spring.data.mongodb.uri");
+        MongoClientURI uri = new MongoClientURI(url);
+        return new MongoClient(uri);
     }
 
 
