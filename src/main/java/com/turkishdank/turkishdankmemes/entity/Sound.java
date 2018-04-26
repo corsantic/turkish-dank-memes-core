@@ -1,6 +1,8 @@
 package com.turkishdank.turkishdankmemes.entity;
 
-public class Sound {
+import java.io.Serializable;
+
+public class Sound  implements Serializable{
 
     private int id;
     private String name;
@@ -21,5 +23,11 @@ public class Sound {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Sound{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

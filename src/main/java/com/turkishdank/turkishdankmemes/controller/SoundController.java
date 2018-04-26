@@ -48,7 +48,7 @@ public class SoundController
         {
             Sound sound = new Sound();
             // todo: name and surname
-            sound.setName("Test " + name);
+            sound.setName( name);
 
             soundService.save(sound);
         }
