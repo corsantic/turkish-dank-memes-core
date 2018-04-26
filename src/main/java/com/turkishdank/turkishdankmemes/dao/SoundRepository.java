@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class SoundRepository extends AbstractMongoRepository<Sound>
@@ -15,8 +17,7 @@ public class SoundRepository extends AbstractMongoRepository<Sound>
         Query query = new Query();
         query.addCriteria(Criteria.where("name").is(name));
 
-        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass));
+        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass,"Sound"));
     }
-
 
 }

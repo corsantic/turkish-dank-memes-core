@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.turkishdank.turkishdankmemes.entity.Sound;
 import com.turkishdank.turkishdankmemes.service.SoundService;
+import org.bson.BasicBSONDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,13 @@ public class SoundController
     {
         return ResponseEntity.ok().body(soundService.loadAll());
     }
+
+
+    @ResponseBody
+    @RequestMapping(value ="/load/{name}")
+    public ResponseEntity<Sound> getByName(@PathVariable("name") String name){
+        Sound sound = soundService.loadByName(name);
+        return ResponseEntity.ok().body(soundService.loadByName(name));}
 
 
     @ResponseBody

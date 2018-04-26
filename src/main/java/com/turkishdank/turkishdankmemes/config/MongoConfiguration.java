@@ -1,5 +1,6 @@
 package com.turkishdank.turkishdankmemes.config;
 
+import com.mongodb.MongoClientURI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -29,7 +30,9 @@ public class MongoConfiguration extends AbstractMongoConfiguration
     {
         String host = environment.getRequiredProperty("spring.data.mongodb.host");
         int port = Integer.parseInt(environment.getRequiredProperty("spring.data.mongodb.port"));
-        return new MongoClient(host, port);
+        String url = environment.getProperty("spring.data.mongodb.uri");
+        MongoClientURI uri = new MongoClientURI(url);
+        return new MongoClient(host,port);
     }
 
 

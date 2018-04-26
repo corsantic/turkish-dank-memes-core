@@ -26,7 +26,7 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     public void save(T t)
     {
 
-        mongoTemplate.save(t);
+        mongoTemplate.save(t,"Sound");
     }
 
     @Override
@@ -34,23 +34,21 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
-        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass));
+        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass,"Sound"));
     }
 
     @Override
     public void deleteAll()
     {
-
         Query query = new Query();
-        mongoTemplate.remove(query, persistentClass);
+        mongoTemplate.remove(query, persistentClass,"Sound");
     }
 
     @Override
     public List<T> loadAll()
-
     {
-        Query query = new Query();
-        return mongoTemplate.find(query, persistentClass);
+
+        return mongoTemplate.findAll(persistentClass,"Sound");
     }
 
 
