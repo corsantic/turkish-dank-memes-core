@@ -2,10 +2,12 @@ package com.turkishdank.turkishdankmemes.config;
 
 import com.mongodb.MongoClientURI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
@@ -34,7 +36,10 @@ public class MongoConfiguration extends AbstractMongoConfiguration
         MongoClientURI uri = new MongoClientURI(url);
         return new MongoClient(uri);
     }
-
+    @Bean
+    public GridFsTemplate gridFsTemplate() throws Exception {
+        return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter());
+    }
 
     @Override
     protected String getMappingBasePackage()
