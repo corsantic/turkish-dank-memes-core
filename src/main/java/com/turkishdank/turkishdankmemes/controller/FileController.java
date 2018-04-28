@@ -2,20 +2,15 @@ package com.turkishdank.turkishdankmemes.controller;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSFile;
+import com.turkishdank.turkishdankmemes.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsOperations;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -25,6 +20,9 @@ public class FileController {
 
     @Autowired
     GridFsOperations gridOperations;
+
+    @Autowired
+    FileService fileService;
 
     // this variable is used to store ImageId for other actions like: findOne or delete
     private String soundFileId = "";
@@ -47,6 +45,22 @@ public class FileController {
 
 
         return ResponseEntity.ok().body("File Uploaded to MongoDb");
+    }
+
+    @ResponseBody
+    @GetMapping("/retrieve/all")
+    public List<GridFSFile> retrieveAll() {
+
+        List<GridFSFile> files = fileService.loadAll();
+        return (files);
+    }
+
+
+    @ResponseBody
+    @GetMapping("/retrieve/{filename}")
+    public GridFSFile retrieveById(@PathVariable("filename") String filename) {
+
+        return fileService.loadByName(filename);
     }
 
 

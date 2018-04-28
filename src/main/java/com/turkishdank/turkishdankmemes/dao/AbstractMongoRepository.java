@@ -26,7 +26,7 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     public void save(T t)
     {
 
-        mongoTemplate.save(t,"Sound");
+        mongoTemplate.save(t,"fs.files");
     }
 
     @Override
@@ -34,7 +34,7 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
-        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass,"Sound"));
+        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass,"fs.files"));
     }
 
     @Override
@@ -48,7 +48,7 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     public List<T> loadAll()
     {
 
-        return mongoTemplate.findAll(persistentClass,"Sound");
+        return mongoTemplate.findAll(persistentClass,"fs.files");
     }
 
 
