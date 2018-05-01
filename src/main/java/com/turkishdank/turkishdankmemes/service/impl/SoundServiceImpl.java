@@ -2,7 +2,6 @@ package com.turkishdank.turkishdankmemes.service.impl;
 
 import com.turkishdank.turkishdankmemes.dao.SoundRepository;
 import com.turkishdank.turkishdankmemes.entity.Sound;
-import com.turkishdank.turkishdankmemes.service.FileService;
 import com.turkishdank.turkishdankmemes.service.SoundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

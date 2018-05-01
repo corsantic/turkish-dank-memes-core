@@ -8,6 +8,7 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 
 public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
 {
@@ -15,6 +16,9 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
 
     @Autowired
     MongoTemplate mongoTemplate;
+
+    @Autowired
+    GridFsTemplate gridFsTemplate;
 
     @SuppressWarnings("unchecked")
     public AbstractMongoRepository()
@@ -26,7 +30,7 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     public void save(T t)
     {
 
-        mongoTemplate.save(t,"fs.files");
+        mongoTemplate.save(t,"Sound");
     }
 
     @Override
@@ -34,7 +38,7 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
-        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass,"fs.files"));
+        return DataAccessUtils.singleResult(mongoTemplate.find(query, persistentClass,"Sound"));
     }
 
     @Override
@@ -48,7 +52,7 @@ public abstract class AbstractMongoRepository<T> implements AbstractDAO<T>
     public List<T> loadAll()
     {
 
-        return mongoTemplate.findAll(persistentClass,"fs.files");
+        return mongoTemplate.findAll(persistentClass,"Sound");
     }
 
 
