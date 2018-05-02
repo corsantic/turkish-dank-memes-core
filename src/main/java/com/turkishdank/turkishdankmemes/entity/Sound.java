@@ -6,7 +6,7 @@ public class Sound  implements Serializable{
 
     private String id;
     private String name;
-
+    private String fullName;
     public String getId() {
         return id;
     }
@@ -21,6 +21,14 @@ public class Sound  implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Override

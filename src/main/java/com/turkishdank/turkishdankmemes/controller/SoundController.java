@@ -1,6 +1,12 @@
 package com.turkishdank.turkishdankmemes.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.turkishdank.turkishdankmemes.entity.Sound;
 import com.turkishdank.turkishdankmemes.service.SoundService;
@@ -37,6 +43,40 @@ public class SoundController
 
 
     @ResponseBody
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    public ResponseEntity check()
+    {
+
+        String filePathString = "/var/www/audios";
+        File folder = new File(filePathString);
+        File[] listOfFiles = folder.listFiles();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                Sound loadedSound = soundService.loadByName(listOfFiles[i].getName());
+                if (loadedSound == null)
+                {
+                    Sound sound = new Sound();
+                    sound.setName(listOfFiles[i].getName());
+                    sound.setFullName(listOfFiles[i].getName()+".mp3");
+                    soundService.save(sound);
+                }
+            } else if (listOfFiles[i].isDirectory()) {
+                return ResponseEntity.ok().body(listOfFiles[i].getName());
+            }
+        }
+
+
+        return ResponseEntity.ok().body(true);
+    }
+
+
+
+
+
+
+
+    @ResponseBody
     @RequestMapping(value = "/save/{name}", method = RequestMethod.POST)
     public ResponseEntity save(@PathVariable("name") String name)
     {
@@ -44,8 +84,8 @@ public class SoundController
         if (loadedSound == null)
         {
             Sound sound = new Sound();
-            // todo: name and surname
             sound.setName(name);
+            sound.setFullName(name+".mp3");
 
             soundService.save(sound);
         }
