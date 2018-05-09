@@ -54,12 +54,11 @@ public class SoundController
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
                 Sound loadedSound = soundService.loadByName(listOfFiles[i].getName());
-                if (loadedSound == null)
+                String[] str =  listOfFiles[i].getName().split(".mp3");
+
+                if (loadedSound == null && str.length>0)
                 {
                     Sound sound = new Sound();
-
-
-                 String[] str =  listOfFiles[i].getName().split(".mp3");
                     sound.setName(str[0]);
                     sound.setFullName(listOfFiles[i].getName());
                     soundService.save(sound);
