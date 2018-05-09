@@ -57,8 +57,11 @@ public class SoundController
                 if (loadedSound == null)
                 {
                     Sound sound = new Sound();
-                    sound.setName(listOfFiles[i].getName());
-                    sound.setFullName(listOfFiles[i].getName()+".mp3");
+
+
+                 String[] str =  listOfFiles[i].getName().split(".mp3");
+                    sound.setName(str[0]);
+                    sound.setFullName(listOfFiles[i].getName());
                     soundService.save(sound);
                 }
             } else if (listOfFiles[i].isDirectory()) {
