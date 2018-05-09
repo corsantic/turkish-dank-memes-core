@@ -43,7 +43,7 @@ public class SoundController
 
 
     @ResponseBody
-    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    @RequestMapping(value = "/check", method = RequestMethod.GET)
     public ResponseEntity check()
     {
 
